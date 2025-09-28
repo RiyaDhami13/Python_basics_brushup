@@ -18,3 +18,12 @@ price_extremes = reviews.groupby(['variety']).price.agg([ min, max])
 
 #a variable sorted_varieties containing a copy of the dataframe from the previous question where varieties are sorted in descending order based on minimum price, then on maximum price
 sorted_varieties = price_extremes.sort_values(by=['min', 'max'], ascending=False)
+
+#a Series whose index is reviewers and whose values is the average review score given out by that reviewer. Hint: you will need the taster_name and points columns
+reviewer_mean_ratings = countries_reviewed = reviews.groupby('taster_name').points.mean()
+
+# to see a summary of the range of values.
+reviewer_mean_ratings.describe()
+
+#a Series whose index is a MultiIndexof {country, variety} pairs.in descending order based on wine count.
+country_variety_counts =  reviews.groupby(['country', 'variety']).size().sort_values(ascending=False)
